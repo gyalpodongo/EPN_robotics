@@ -3,8 +3,41 @@ import numpy as np
 from scipy.io import savemat
 from scipy.spatial.transform import Rotation
 import random
+
+"""
+This script processes a dataset of XYZ files and converts them into PLY and MAT files in a specified folder structure.
+
+The input folder should have the following structure:
+folder/object/object_number.xyz
+
+The script creates a new folder structure with the following format:
+newfolder/object/train (containing .ply and .mat files)
+newfolder/object/test (containing .ply and .mat files)
+newfolder/object/testR (containing only .mat files with assigned rotation angles)
+
+The script randomly splits the files for each object into train (80%) and test (20%) sets.
+The testR folder contains the same files as the test folder but with an assigned rotation matrix in the .mat files.
+
+Note: The script is currently set to process a maximum of 40 objects (MAX_OBJECTS) due to model constraints.
+      The point clouds are also reduced by a factor of 4 (vertices[::4]) to accommodate GPU constraints.
+      To change the number of points per object, modify the vertices[::4] line.
+
+Input:
+    input_folder: The path to the input folder containing the XYZ files.
+    output_folder: The path to the output folder where the new folder structure will be created.
+
+Usage:
+    Specify the input_folder and output_folder paths in the script and run it.
+    The script will process the XYZ files and create the new folder structure with PLY and MAT files.
+"""
+
 MAX_OBJECTS = 40
 def generate_random_rotation_matrix():
+    """
+    Generate a random rotation matrix.
+
+    Returns:
+        R: A random rotatio    """
     # Generate random rotation angles (in radians)
     angles = np.random.uniform(0, 2*np.pi, size=3)
     
@@ -27,6 +60,17 @@ def generate_random_rotation_matrix():
     return R
 
 def convert_xyz_to_ply_and_mat(xyz_file, ply_file, mat_file, object_name, object_id, rotated_mat_file=None):
+    """
+    Convert an XYZ file to PLY and MAT files.
+
+    Args:
+        xyz_file: The path to the input XYZ file.
+        ply_file: The path to the output PLY file.
+        mat_file: The path to the output MAT file.
+        object_name: The name of the object.
+        object_id: The ID of the object.
+        rotated_mat_file: The path to the output rotated MAT file (optional).
+    """
     # Read the .xyz file
     points = np.loadtxt(xyz_file)
 
@@ -98,6 +142,13 @@ def convert_xyz_to_ply_and_mat(xyz_file, ply_file, mat_file, object_name, object
         savemat(rotated_mat_file, rotated_data_dict)
 
 def process_files(input_folder, output_folder):
+    """
+    Process the XYZ files in the input folder and create the new folder structure with PLY and MAT files.
+
+    Args:
+        input_folder: The path to the input folder containing the XYZ files.
+        output_folder: The path to the output folder where the new folder structure will be created.
+    """
     # Create the output folder if it doesn't exist
     os.makedirs(output_folder, exist_ok=True)
 

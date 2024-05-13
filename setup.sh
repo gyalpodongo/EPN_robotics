@@ -1,5 +1,24 @@
-pip install virtualenv
-python -m venv venv
+#!/bin/bash
+<<COMMENT
+This script sets up the environment and downloads the necessary datasets for the project.
+
+It performs the following steps:
+1. Creates a virtual environment named 'venv'
+2. Activates the virtual environment
+3. Installs the dependencies listed in the 'requirements.txt' file
+4. Installs the 'vgtk' package
+5. Downloads and extracts the 'EvenAlignedModelNet40PC' dataset
+6. Downloads and extracts the '3dsgrasp_ycb_train_test_split' dataset
+7. Creates the 'YCB40' dataset by running the 'createYCB40.py' script
+
+After running this script, the environment will be set up and the required datasets will be available.
+To use the environment in the future, activate the virtual environment using 'source venv/bin/activate'.
+
+If your system uses python3/pip3 instead of python/pip in terminal, make sure to change this respective within this bash file.
+COMMENT
+
+pip3 install virtualenv
+python3 -m venv venv
 echo "ENVIRONMENT CREATED: use source venv/bin/activate for future activations" 
 source venv/bin/activate
 echo "INSTALLING DEPENDENCIES"

@@ -1,6 +1,28 @@
 import matplotlib.pyplot as plt
 import pickle
 
+"""
+This script creates a plot to visualize the accuracies of a model for each category in the YCB40 dataset.
+
+The script reads the accuracies from a pickle file specified by the 'catFile' variable. The pickle file contains
+a dictionary where the keys are the category names and the values are lists of accuracies.
+
+The 'name_format' dictionary is used to format the category names from the YCB40 dataset to make them more readable.
+If a category name is found in the 'name_format' dictionary, the corresponding formatted name is used; otherwise, the
+original category name is used.
+
+The script sorts the data by accuracy in descending order and creates a horizontal bar plot using Matplotlib. Each bar
+represents a category, and the length of the bar represents the accuracy percentage. The bars are color-coded based on
+the accuracy range: red for accuracy above 90%, yellow for accuracy between 80% and 90%, and blue for accuracy below 80%.
+
+The plot includes labels for the categories and accuracy percentages, as well as an x-axis label, y-axis label, and a
+title displaying the average accuracy score. The x-axis limit is set to accommodate 100% bars, and the y-axis limit is
+adjusted based on the number of categories.
+
+The plot is customized with adjusted figure size, plot margins, and x-axis grid lines. Finally, the plot is saved as
+a PNG file named 'accuracy_plot.png' with a resolution of 300 DPI.
+"""
+
 # Data: list of tuples (category, accuracy)
 
 name_format = {
