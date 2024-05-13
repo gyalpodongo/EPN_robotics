@@ -1,0 +1,17 @@
+numpy
+torch
+gdown
+torchvision
+scikit-image
+scikit-learn
+scipy
+open3d
+trimesh
+tqdm
+imageio
+plyfile
+parse
+colour
+matplotlib
+open3d
+pandas
