@@ -35,15 +35,21 @@ This process may take a while due to all the steps it follows as downloading dat
 
 **Datasets**
 
+
+**Rotated Modelnet40**
 The rotated Modelnet40 point cloud dataset is generated from the [Aligned Modelnet40 subset](https://github.com/lmb-freiburg/orion) and can be downloaded using this [link](https://drive.google.com/file/d/1xRoYjz2KCwkyIPf21E-WKIZkjLYabPgJ/view?usp=sharing). Through our training we were able to outpreform the original EPN model in the classification task with an accuracy score of **88.39%**. 
 
 ![](https://github.com/gyalpodongo/EPN_robotics/blob/main/accuracy_plotModenet40.png)
+
+**Rotated YCB40**
 
 The rotated YCB40 point cloud dataset is generated from the [YCB dataset](https://www.ycbbenchmarks.com/) and can be downloaded using this [link](https://drive.google.com/file/d/1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ/view?usp=drive_link). We obtained very promising results as our EPN was able to classify the objects within YCB with an accuracy score of **89.74%**. 3DSGrasp score was of **76%**, however their classificaiton process involved different steps, such as doing the classfication after their own ML model for completion created a new point cloud. Whilst this results isn't directly comparable we believe if we can implement EPN into their pileine, we could get higher results. Furthermore, we reduce their original dataset from 56 to 40 objects to fit into our EPN model and the pointclouds are reduced from 8092 to 2048 per image due to our GPU capacity.
 
 ![](https://github.com/gyalpodongo/EPN_robotics/blob/main/accuracy_plotYCB40.png)
 
-If you want to use another dataset or expand the current one on YCB40, you can use the `createYCB40.py` script which will trasfrom a folder of `.xyz` files into the required format for our model of `.ply` and `.mat` files.
+
+**Extra Datasets**
+If you want to use another dataset or expand the current one on YCB40, you can use the `createYCB40.py` script which will trasfrom a folder of `.xyz` files into the required format for our model of `.ply` and `.mat` files. Refer to the folder structure of `3dsgrasp_ycb_train_test_split/` to do this succesfully.
 
 **Pretrained Model**
 
