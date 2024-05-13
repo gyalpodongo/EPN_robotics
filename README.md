@@ -1,9 +1,11 @@
 
 # Equivariant Point Network (EPN) for Robotics
 
-This repository contains a revamped version of the code (in PyTorch) for [Equivariant Point Network for 3D Point Cloud Analysis](https://arxiv.org/abs/2103.14147)  (CVPR'2021) by Haiwei Chen, [Shichen Liu](https://shichenliu.github.io/), [Weikai Chen](http://chenweikai.github.io/) and [Hao Li](http://www.hao-li.com/Hao_Li/Hao_Li_-_about_me.html). The code here has been adapted for modern dependencies, reduced to just the classification model and tested with the YCB robotics dataset.
+This repository contains a revamped version of the code (in PyTorch) for [Equivariant Point Network for 3D Point Cloud Analysis](https://arxiv.org/abs/2103.14147). The code here has been adapted for modern dependencies, reduced to just the classification model and tested with the YCB robotics dataset.
 
-Another big inspiration for this project comes from [3DSGrasp]("https://github.com/NunoDuarte/3DSGrasp") due to how attention can be key in robostic grasping methods. We thank the authors of both papers for their massive help with this project. 
+Another big inspiration for this project comes from [3DSGrasp]("https://github.com/NunoDuarte/3DSGrasp") due to how attention can be key in robostic grasping methods. 
+
+We thank the authors of both projects for their guidance with this project. 
 
 ## Contents
 
@@ -22,7 +24,7 @@ Thanks to these properties, the classification process becomes more accurate wit
 
 ## Installation
 
-The code has been tested on Python3.10.2, PyTorch 2.0.1 and CUDA (12). To install all requirements, datasets, models and set up the repo just run:
+The code has been tested on Python3.10.2, PyTorch 2.0.1 and CUDA (12) in an Nvidia A100. To install all requirements, datasets, models and set up the repo just run:
 ```
 source setup.sh
 ```
@@ -37,14 +39,15 @@ The rotated Modelnet40 point cloud dataset is generated from the [Aligned Modeln
 
 ![](https://github.com/gyalpodongo/EPN_robotics/blob/main/accuracy_plotModenet40.png)
 
-The rotated YCB40 point cloud dataset is generated from the [YCB dataset](https://www.ycbbenchmarks.com/) and can be downloaded using this [link](https://drive.google.com/file/d/1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ/view?usp=drive_link). We obtained very promising results as our EPN was able to classify the objects within YCB with an accuracy score of **89.74%**. 3DSGrasp score was of **76%**, however their classificaiton process involved different steps, such as doing the classfication after their own ML model for completion created a new point cloud. Whilst this results isn't directly comparable we believe if we can implement EPN into their pileine, we could get higher results. 
+The rotated YCB40 point cloud dataset is generated from the [YCB dataset](https://www.ycbbenchmarks.com/) and can be downloaded using this [link](https://drive.google.com/file/d/1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ/view?usp=drive_link). We obtained very promising results as our EPN was able to classify the objects within YCB with an accuracy score of **89.74%**. 3DSGrasp score was of **76%**, however their classificaiton process involved different steps, such as doing the classfication after their own ML model for completion created a new point cloud. Whilst this results isn't directly comparable we believe if we can implement EPN into their pileine, we could get higher results. Furthermore, we reduce their original dataset from 56 to 40 objects to fit into our EPN model and the pointclouds are reduced from 8092 to 2048 per image due to our GPU capacity.
 
 ![](https://github.com/gyalpodongo/EPN_robotics/blob/main/accuracy_plotYCB40.png)
 
+If you want to use another dataset or expand the current one on YCB40, you can use the `createYCB40.py` script which will trasfrom a folder of `.xyz` files into the required format for our model of `.ply` and `.mat` files.
+
 **Pretrained Model**
 
-Pretrained model for EPN ModelNet40 can be downloaded using this [link](https://drive.google.com/file/d/1vy9FRGWQsuVi4nf--YIqg_8yHFiWWJhh/view?usp=sharing)
-Pretrained model for EPN YCB40 can be downloaded using this [link](https://drive.google.com/file/d/1vy9FRGWQsuVi4nf--YIqg_8yHFiWWJhh/view?usp=sharing)
+Pretrained model for EPN ModelNet40 and YCB40 will be under the names of `spconv_modelnet` and `spconv_ycb.pth` respectively.
 
 **Training**
 
@@ -55,9 +58,11 @@ The following lines can be used for the training of each experiment using either
 CUDA_VISIBLE_DEVICES=0 python run_modelnet.py experiment -d PATH_TO_DATASET
 ```
 
+This will create a `.pth` file which will be in `trained_models/playground/model_TIME/ckpt`. If you want to edit the options such as when to save a checkpoint path, or evaluate the model or log results, you can do it in the `SPConvNets/options.py` file.
+
 **Evaluation**
 
-The following lines can be used for the evaluation of each experiment using either EvenAlignedModelNet40PC or YCB40 as the path to dataset. Make sure to use the correct weights when evaluating the model's performance. Furthermore, this will ensure that the accuracy for each category will be recorded in a file called `cataccs.pkl`.
+The following lines can be used for the evaluation of each experiment using either `EvenAlignedModelNet40PC` or `YCB40` as the path to dataset. If you use the pretrained weights, make sure to use the correct weights when evaluating the model's performance which can be either `spconv_modelnet` or `spconv_ycb.pth` respectively. Otherwise, you can use your own weights. Furthermore, this will script ensure that the accuracy for each category will be recorded in a file called `cataccs.pkl`.
 
 
 ```
@@ -65,26 +70,21 @@ The following lines can be used for the evaluation of each experiment using eith
 CUDA_VISIBLE_DEVICES=0 python run_modelnet_cataccs.py experiment -d PATH_TO_DATASET -r PATH_TO_MODEL --run-mode eval
 ```
 
-
-
 **Visualization**
 
+To visualize the results after evaluation, within the `visualize.py`, make sure you use the correct `.pkl` for the categories accuracies. Then you can just run 
+```
+python visualize.py
+```
+
+This will generate a file called `accuracy_plot.png` where you can see how well the model classifies each object by analyzing thei respective equaivariant properties.
+
+Furthermore, if you want to visualize any fo the point clouds you can use our `point_cloud.py` script.
 
 
 ## Contact
 
-Haiwei Chen: chw9308@hotmail.com
+Gyalpo Dongo: gyalpodongo@gmail.com
 Any discussions or concerns are welcomed!
 
-**Citation**
-If you find our project useful in your research, please consider citing:
 
-```
-@article{chen2021equivariant,
-  title={Equivariant Point Network for 3D Point Cloud Analysis},
-  author={Chen, Haiwei and Liu, Shichen and Chen, Weikai and Li, Hao and Hill, Randall},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={14514--14523},
-  year={2021}
-}
-```
