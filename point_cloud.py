@@ -42,7 +42,7 @@ def plot_point_cloud(points):
     plt.savefig('saucepan.png')
 
 # Load your PLY file
-points = load_ply('3DSGrasp40/cellphone_poisson_008/test/cellphone_poisson_008__10_4_10_y.ply')
+points = load_ply('YCB40/cellphone_poisson_008/test/cellphone_poisson_008__10_4_10_y.ply')
 
 # Plot the loaded point cloud
 plot_point_cloud(points)

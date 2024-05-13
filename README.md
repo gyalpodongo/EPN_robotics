@@ -12,7 +12,7 @@ We thank the authors of both projects for their guidance with this project.
 1. [Introduction](#introduction)
 2. [Installation](#installation)
 3. [Experiments](#experiments)
-4. [Contact](#contact)
+<!-- 4. [Contact](#contact) -->
 
 ## Introduction
 
@@ -25,12 +25,18 @@ Thanks to these properties, the classification process becomes more accurate wit
 ## Installation
 
 The code has been tested on Python3.10.2, PyTorch 2.0.1 and CUDA (12) in an Nvidia A100. To install all requirements, datasets, models and set up the repo just run:
+
 ```
 source setup.sh
 ```
 
-This process may take a while due to all the steps it follows as downloading datasets, formatting them and installing the Vision-Graphics deep learning ToolKit developed for EPN. You won't need to downlaod any of the weights/datasets below if you run `setup.sh` succesfully.
+This process will take a while due to all the steps it follows as downloading datasets, formatting them and installing the Vision-Graphics deep learning ToolKit developed for EPN. You won't need to downlaod any of the weights/datasets below if you run `setup.sh` succesfully.
 
+For furture use, you'll have to activate the virtual environment using:
+
+```
+source venv/bin/activate
+```
 ## Experiments
 
 **Datasets**
@@ -49,6 +55,7 @@ The rotated YCB40 point cloud dataset is generated from the [YCB dataset](https:
 
 
 **Extra Datasets**
+
 If you want to use another dataset or expand the current one on YCB40, you can use the `createYCB40.py` script which will trasfrom a folder of `.xyz` files into the required format for our model of `.ply` and `.mat` files. Refer to the folder structure of `3dsgrasp_ycb_train_test_split/` to do this succesfully.
 
 **Pretrained Model**
@@ -68,7 +75,7 @@ This will create a `.pth` file which will be in `trained_models/playground/model
 
 **Evaluation**
 
-The following lines can be used for the evaluation of each experiment using either `EvenAlignedModelNet40PC` or `YCB40` as the path to dataset. If you use the pretrained weights, make sure to use the correct weights when evaluating the model's performance which can be either `spconv_modelnet` or `spconv_ycb.pth` respectively. Otherwise, you can use your own weights. Furthermore, this will script ensure that the accuracy for each category will be recorded in a file called `cataccs.pkl`.
+The following lines can be used for the evaluation of each experiment using either `EvenAlignedModelNet40PC` or `YCB40` as the path to dataset. If you use the pretrained weights, make sure to use the correct weights when evaluating the model's performance which can be either `spconv_modelnet.pth` or `spconv_ycb.pth` respectively. Otherwise, you can use your own weights. Furthermore, this will script ensure that the accuracy for each category will be recorded in a file called `cataccs.pkl`.
 
 
 ```
@@ -87,10 +94,10 @@ This will generate a file called `accuracy_plot.png` where you can see how well 
 
 Furthermore, if you want to visualize any fo the point clouds you can use our `point_cloud.py` script.
 
-
+<!-- 
 ## Contact
 
 Gyalpo Dongo: gyalpodongo@gmail.com
-Any discussions or concerns are welcomed!
+Any discussions or concerns are welcomed! -->
 
 

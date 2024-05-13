@@ -37,10 +37,10 @@ class Trainer():
         os.makedirs(self.root_dir, exist_ok=True)
 
         # saving opt
-        opt_path = os.path.join(self.root_dir, 'opt.txt')
-        # TODO: hierarchical args are not compatible wit json dump
-        with open(opt_path, 'w') as fout:
-            json.dump(opt_dict, fout, indent=2)
+        # opt_path = os.path.join(self.root_dir, 'opt.txt')
+        # # TODO: hierarchical args are not compatible wit json dump
+        # with open(opt_path, 'w') as fout:
+        #     json.dump(opt_dict, fout, indent=2)
 
         # create logger
         log_path = os.path.join(self.root_dir, 'log.txt')

@@ -123,7 +123,10 @@ def get_adjmatrix_trimesh(mesh, gsize=None):
         fid = np.argwhere(face_adj == i)
         fid[:,1] = binary_swap(fid[:,1])
         adj_idx.append(face_adj[tuple(np.split(fid, 2, axis=1))].T)
-
+    
+    #TODO: FIXED FOR MODERN DEPENDENCIES
+    max_size = max(arr.shape[1] for arr in adj_idx)
+    adj_idx = [np.pad(arr, ((0, 0), (0, max_size - arr.shape[1])), mode='constant') for arr in adj_idx] 
     face_adj =  np.vstack(adj_idx).astype(np.int32)
 
     if gsize is None:

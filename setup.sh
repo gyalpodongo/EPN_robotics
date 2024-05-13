@@ -1,18 +1,26 @@
-python -m venv venv 
+pip install virtualenv
+python -m venv venv
+echo "ENVIRONMENT CREATED: use source venv/bin/activate for future activations" 
 source venv/bin/activate
+echo "INSTALLING DEPENDENCIES"
 pip install -r requirements.txt
-gdown --id 1xRoYjz2KCwkyIPf21E-WKIZkjLYabPgJ -O EvenAlignedModelNet40PC.tar.gz
-tar -xzvf EvenAlignedModelNet40PC.tar.gz
-gdown --id 1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ 3dsgrasp_ycb_train_test_split.zip
-unzip 3dsgrasp_ycb_train_test_split.zip
-python createYCB40.py
-
+echo "DEPENDENCIES INSTALLED"
+echo "INSTALLING vgtk"
 cd vgtk
 python setup.py install
 cd ..
-echo "INSTALLATION FINISHED. ACTIVATE VIRTUAL ENVIRONMENT FOR FUTURE TIMES YOU USE THIS REPO. THERE MAY BE SOME ISSUES WITH np.bool or np.float in the packages when running training or evaluation. Follow python recommendation by changing these instances to bool and float to make everything work."
+echo "vgtk INSTALLED"
 
-#install vgtk
+echo "DOWNLOADING DATASETS"
+gdown --id 1xRoYjz2KCwkyIPf21E-WKIZkjLYabPgJ -O EvenAlignedModelNet40PC.tar.gz
+tar -xzvf EvenAlignedModelNet40PC.tar.gz
+gdown --id 1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ -O 3dsgrasp_ycb_train_test_split.zip
+unzip -o 3dsgrasp_ycb_train_test_split.zip -d 3dsgrasp_ycb_train_test_split/
+unzip 3dsgrasp_ycb_train_test_split/gt.zip
+unzip 3dsgrasp_ycb_train_test_split/input.zip
 
-#print into terminal that we may have to fix manually some np.bool stuff as well as np.float when running training and evaluation
+echo "CREATING YCB40"
+python createYCB40.py
+
+echo "INSTALLATION FINISHED. ACTIVATE VIRTUAL ENVIRONMENT FOR FUTURE TIMES YOU USE THIS REPO."
 
