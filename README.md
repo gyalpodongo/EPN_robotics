@@ -27,7 +27,7 @@ The code has been tested on Python3.10.2, PyTorch 2.0.1 and CUDA (12). To instal
 source setup.sh
 ```
 
-This process may take a while due to all the steps it follows as downloading datasets, formatting them and installing the Vision-Graphics deep learning ToolKit developed for EPN.
+This process may take a while due to all the steps it follows as downloading datasets, formatting them and installing the Vision-Graphics deep learning ToolKit developed for EPN. You won't need to downlaod any of the weights/datasets below if you run `setup.sh` succesfully.
 
 ## Experiments
 
@@ -37,13 +37,14 @@ The rotated Modelnet40 point cloud dataset is generated from the [Aligned Modeln
 
 ![](https://github.com/gyalpodongo/EPN_robotics/blob/main/accuracy_plotModenet40.png)
 
-The rotated YCB40 point cloud dataset is generated from the [YCB dataset]() and can be downloaded using this [link]()
+The rotated YCB40 point cloud dataset is generated from the [YCB dataset](https://www.ycbbenchmarks.com/) and can be downloaded using this [link](https://drive.google.com/file/d/1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ/view?usp=drive_link). We obtained very promising results as our EPN was able to classify the objects within YCB with an accuracy score of **89.74%**. 3DSGrasp score was of **76%**, however their classificaiton process involved different steps, such as doing the classfication after their own ML model for completion created a new point cloud. Whilst this results isn't directly comparable we believe if we can implement EPN into their pileine, we could get higher results. 
+
+![](https://github.com/gyalpodongo/EPN_robotics/blob/main/accuracy_plotYCB40.png)
 
 **Pretrained Model**
 
 Pretrained model for EPN ModelNet40 can be downloaded using this [link](https://drive.google.com/file/d/1vy9FRGWQsuVi4nf--YIqg_8yHFiWWJhh/view?usp=sharing)
 Pretrained model for EPN YCB40 can be downloaded using this [link](https://drive.google.com/file/d/1vy9FRGWQsuVi4nf--YIqg_8yHFiWWJhh/view?usp=sharing)
-
 
 **Training**
 
