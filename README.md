@@ -35,7 +35,7 @@ This process may take a while due to all the steps it follows as downloading dat
 
 The rotated Modelnet40 point cloud dataset is generated from the [Aligned Modelnet40 subset](https://github.com/lmb-freiburg/orion) and can be downloaded using this [link](https://drive.google.com/file/d/1xRoYjz2KCwkyIPf21E-WKIZkjLYabPgJ/view?usp=sharing). Through our training we were able to outpreform the original EPN model in the classification task with an accuracy score of **88.39%**. 
 
-![](https://github.com/gyalpodongo/EPN_robotics/accuracy_plotModenet40.png)
+![](https://github.com/gyalpodongo/EPN_robotics/blob/main/accuracy_plotModenet40.png)
 
 The rotated YCB40 point cloud dataset is generated from the [YCB dataset]() and can be downloaded using this [link]()
 
