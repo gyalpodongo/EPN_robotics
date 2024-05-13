@@ -7,6 +7,7 @@ tar -xzvf EvenAlignedModelNet40PC.tar.gz
 #download ycb
 #download realese weights
 #download our model weights
+#create new YCB40 dataset
 
 #install vgtk
 
